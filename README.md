@@ -1,13 +1,11 @@
 ## Summary
-Dockerized version of esniper, a lightweight eBay sniping tool
+Fork of [Michael Rüttger's dockerized esniper version](https://github.com/mruettgers/docker-esniper),
+changed to work with mounted config files instead of command line arguments.
 
 ## Usage
-    docker-esniper -u <username> -p <password> -i <item-number,max bid> [-i <item number,max bid>] [-q <quantity to buy>] [-s <time to place bid>]
+    docker run -d --rm -v /local/config/directory:/var/lib/esniper/config dieterkoch/docker-esniper
 
-## Options
-    -h  Show usage information.
-    -u  Username.
-    -p  Password.
-    -i  Number of item to bid on with max bid separated by comma. Can be given multiple times. 
-    -q  Quantity of items to buy [default: 1].
-    -s  Defines when to place bid in seconds before end of auction [default: 10].
+## Config files
+The image expects two files in the mounted directory: a configuration file named
+`esniper.conf` and an auction file named `auctions`. Information
+on the layouts of both files can be found in [the manual](http://esniper.sourceforge.net/esniper_man.html).
