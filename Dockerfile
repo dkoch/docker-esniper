@@ -1,19 +1,19 @@
 FROM alpine
-MAINTAINER Michael Ruettgers <michael@ruettgers.eu>
+MAINTAINER Dieter Koch <dk@dkoch.org>
 
-ENV ESNIPER_VERSION 2.33.0
+ENV ESNIPER_VERSION master
 
 RUN apk add --update build-base curl-dev bash git && \
   rm -rf /var/cache/apk/*
 
 RUN cd /tmp/ && \
-  git clone -b ${ESNIPER_VERSION} --depth 1 https://github.com/mruettgers/esniper.git && \
+  git clone -b ${ESNIPER_VERSION} --depth 1 https://github.com/dkoch/esniper.git && \
   cd /tmp/esniper && \
   ./configure && \
   make && \
   make install && \
   cd /tmp && \
-  rm -rf /tmp/esniper 
+  rm -rf /tmp/esniper
 
 RUN ([ -d /var/lib/esniper ] || mkdir -p /var/lib/esniper) && \
     ([ -d /var/lib/esniper/logs ] || mkdir -p /var/lib/esniper/logs) && \
